@@ -1,19 +1,18 @@
-
 import numpy as np
 
-def guess_number(Start=1,Finish=101)-> int:
+def guess_number(Start = 1,Finish = 101) -> int:
     """Данная функция угадывает число которая сама же и загадавыет))
     Args:
         Она принимает 2 значения Start ,Finish - начало диапозона конец диапозона из которго она берёт числа
     Returns:
            Возввращает кортеж из угаданного числа и количество попыток ушедших на разгадку
     """
-    number=np.random.randint(Start,Finish)  #случайное число загаданное компьютером 
+    number = np.random.randint(Start,Finish)  #случайное число загаданное компьютером 
 
-    predikt_number=int(Finish/2) #первым предложенным числом будет середина интервалла
-    count=0 # подсчёт попыток
-    big_predict_number=[Start-1,] # список чисел которые меньше предложенного числа
-    small_predict_number=[Finish+1,] # список чисел которые больше предложенного чсила
+    predikt_number = int(Finish/2) #первым предложенным числом будет середина интервалла
+    count = 0  # подсчёт попыток
+    big_predict_number = [Start-1,] # список чисел которые меньше предложенного числа
+    small_predict_number = [Finish+1,] # список чисел которые больше предложенного чсила
 
     while True:
         """ принцеп работы данного цикла :
@@ -28,28 +27,27 @@ def guess_number(Start=1,Finish=101)-> int:
     
         count+=1 # начисление попыток
         
-        if number>predikt_number:                                  #узнаем что чило меньше загаданного
+        if number > predikt_number:                                  #узнаем что чило меньше загаданного
             big_predict_number.append(predikt_number)              # добавляем элемент в список большых загаданного числа
-            diffrence=abs(int((min(small_predict_number)-predikt_number)/2)) 
+            diffrence=abs(int((min(small_predict_number) - predikt_number)/2)) 
             if diffrence==0:                                       # Защита от зацикливания
                 print("corr",number)                               # Сообщение появится если значения придётся корректировать
                 diffrence=1         # прировняет разнось к 1 чтоб данный брок кода не повторялся постоянно и переменная predikt_number менялась
-            predikt_number=predikt_number+diffrence                # измение переменной predict_number
+            predikt_number=predikt_number + diffrence                # измение переменной predict_number
             
             
         elif number<predikt_number:
             small_predict_number.append(predikt_number) 
-            diffrence=abs(int((max(big_predict_number)-predikt_number)/2)) 
+            diffrence=abs(int((max(big_predict_number) - predikt_number)/2)) 
             if diffrence==0:
                 print("corr",number) 
                 diffrence=1 
-            predikt_number=predikt_number-diffrence 
+            predikt_number=predikt_number - diffrence 
             
         else: # Число угаданно выход из цикла
             break
         
     return(number,count)  
-
 
 
 def test_funks(trys=1000,return_tuple=False)->tuple:
@@ -92,7 +90,7 @@ def test_funks(trys=1000,return_tuple=False)->tuple:
     return dek_arg
 
 
-a=test_funks(1000,return_tuple=True)()(guess_number)
-
-
-print(a)
+# if __name__=="__main__":
+    
+#     a=test_funks(1000,return_tuple=True)()(guess_number)
+#     print(a)
